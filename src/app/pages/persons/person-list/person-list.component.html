@@ -1,0 +1,28 @@
+<div class="" *ngFor="let person of personList">
+  <app-card [cardTitle]="person.personName" [cardDescription]="getAge(person.personBirthDate)"
+            (onClickEmitter)="deletePerson(person.personId)">
+    <app-button [buttonType]="'button'" [buttonText]="'Ver habilidades'"
+                [buttonClass]="'text-secondary bg-tertiary hover:bg-primary'"
+                (onClickEmitter)="setModalVisibility(person.personId)"
+    />
+  </app-card>
+  <app-modal *ngIf="person.modalVisibility" [modalTitle]="'Habilidades de ' + person.personName"
+             [modalDescription]="'A continuación, puede observar las habilidades.'"
+             [modalVisibility]="isModalVisible" (onClickCloseModalEmitter)="setModalVisibility(person.personId)">
+    <div class="flex flex-row flex-wrap gap-1">
+      <div class="flex-1 flex flex-col bg-primary rounded-2xl p-2 justify-center items-center"
+           *ngFor="let skill of getSkillsFromIds(person.personSkillsId)">
+        <h1 class="text-secondary">{{ skill.skillName }}</h1>
+        <fa-icon class="text-secondary" [size]="'3x'" [icon]="skill.skillIcon"/>
+      </div>
+
+      <div *ngIf="getSkillsFromIds(person.personSkillsId).length === 0">
+        <app-not-found [color]="'text-primary'" [tittle]="'No cuenta con habilidades'" [description]="'¡Sigue mejorando!'"/>
+      </div>
+
+    </div>
+  </app-modal>
+</div>
+
+
+<app-not-found *ngIf="personList.length === 0"/>

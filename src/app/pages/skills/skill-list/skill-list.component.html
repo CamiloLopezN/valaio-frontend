@@ -1,0 +1,12 @@
+<div class="" *ngFor="let skill of skillList">
+  <app-card [cardTitle]="skill.skillName" [cardDescription]="'Dificultad'" [cardIcon]="skill.skillIcon"
+            (onClickEmitter)="deleteSkill(skill.skillId)">
+    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+      <div class="bg-blue-600 h-2.5 rounded-full"
+           [style.width]="getPercentageFromSKillDifficulty(skill.skillDifficulty!)">
+      </div>
+    </div>
+  </app-card>
+</div>
+
+<app-not-found *ngIf="skillList.length === 0"/>

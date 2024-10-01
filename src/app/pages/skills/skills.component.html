@@ -1,0 +1,13 @@
+<app-header-pages [tittle]="'Gestión de'" [subtitle]="'habilidades'"
+                  [description]="'En esta sección puede eliminar, editar y crear nuevas habilidades.'"
+                  (inputValueEmitter)="getInputValue($event)">
+  <app-button [buttonText]="'Crear Habilidad'"  (onClickEmitter)="setModalVisibility()"/>
+</app-header-pages>
+<app-skill-list [skillList]="filteredSkillList"/>
+
+
+<app-modal [modalTitle]="'Creación de habilidades'"
+           [modalDescription]="'Ingrese los datos de la habilidad que desea crear.'"
+           [modalVisibility]="isModalVisible" (onClickCloseModalEmitter)="setModalVisibility()">
+  <app-skill-create/>
+</app-modal>

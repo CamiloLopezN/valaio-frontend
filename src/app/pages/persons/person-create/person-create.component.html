@@ -1,0 +1,38 @@
+<form class="flex flex-col gap-4"
+      [formGroup]="personForm" (ngSubmit)="submitPerson()">
+  <div>
+    <label for="personName" class="block mb-1 text-xs font-medium text-primary">Nombre completo</label>
+    <input type="text" id="personName" formControlName="personName"
+           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+           focus:border-blue-500 block w-full p-2.5"
+           placeholder="Nombre completo" required/>
+  </div>
+
+  <div>
+    <label for="personName" class="block mb-1 text-xs font-medium text-primary">Fecha de Nacimiento</label>
+    <input type="date" id="personBirthDate" formControlName="personBirthDate"
+           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+           focus:border-blue-500 block w-full p-2.5"
+           required/>
+  </div>
+
+  <div class="flex flex-row flex-wrap gap-1">
+    <button type="button"
+            class="flex-1 flex flex-col {{personSkillsIds.includes(skill.skillId) ? 'bg-tertiary':'bg-primary'}} rounded-2xl p-2
+      justify-center items-center cursor-pointer"
+            (click)="onClickSkill(skill.skillId)"
+            *ngFor="let skill of skills">
+      <h1 class="text-secondary">{{ skill.skillName }}</h1>
+      <fa-icon class="text-secondary" [size]="'3x'" [icon]="skill.skillIcon"/>
+    </button>
+  </div>
+
+  <div class="flex flex-row-reverse">
+    <app-button [buttonState]="personForm.invalid"
+                (onClickEmitter)="submitPerson()"
+                [buttonType]="'submit'" [buttonText]="'Crear persona'"
+                [buttonClass]="'text-secondary bg-primary hover:bg-tertiary'"/>
+  </div>
+
+
+</form>

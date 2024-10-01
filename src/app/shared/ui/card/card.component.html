@@ -1,0 +1,12 @@
+<div class="w-56 flex flex-col bg-secondary rounded-lg shadow p-4">
+  <div class="flex flex-row justify-end relative gap-4">
+    <fa-icon (click)="onClickButton()" [icon]="faTrash"
+             class="text-tertiary cursor-pointer hover:text-primary hover:scale-125"/>
+  </div>
+  <div class="flex flex-col items-center gap-2">
+    <fa-icon class="text-primary" [size]="'5x'" [icon]="cardIcon"/>
+    <h5 class="text-xl font-medium text-primary text-pretty">{{ cardTitle }}</h5>
+    <span class="text-sm text-gray-500 dark:text-gray-400">{{ cardDescription }}</span>
+    <ng-content/>
+  </div>
+</div>

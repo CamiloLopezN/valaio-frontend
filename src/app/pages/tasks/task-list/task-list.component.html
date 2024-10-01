@@ -1,0 +1,40 @@
+<div class="" *ngFor="let task of taskList">
+  <app-card [cardTitle]="task.taskName"
+            [cardDescription]="task.taskLimitDate + ' - ' + (task.taskStatus === 'COMPLETED' ? 'Completada' : 'Pendiente')"
+            (onClickEmitter)="deleteTask(task.taskId)">
+    <div class="flex flex-row items-center justify-between w-full">
+
+      <fa-icon *ngIf="task.taskStatus === 'COMPLETED'" class="text-tertiary cursor-not-allowed" [size]="'2xl'"
+               [icon]="faCheck"/>
+      <fa-icon (click)="completeTask(task.taskId)" *ngIf="task.taskStatus === 'PENDING'"
+               class="text-tertiary cursor-pointer"
+               [size]="'2xl'" [icon]="faClock"/>
+
+      <app-button [buttonType]="'button'" [buttonText]="'Ver Personas'"
+                  [buttonClass]="'text-secondary bg-tertiary hover:bg-primary'"
+                  (onClickEmitter)="setModalVisibility(task.taskId)"
+      />
+    </div>
+  </app-card>
+  <app-modal *ngIf="task.modalVisibility" [modalTitle]="'Nombre de la tarea: ' + task.taskName"
+             [modalDescription]="'La fecha limite es: ' + task.taskLimitDate +
+             ' y el estado de la tarea es: ' + task.taskStatus"
+             [modalVisibility]="isModalVisible" (onClickCloseModalEmitter)="setModalVisibility(task.taskId)">
+
+    <div class="flex flex-row flex-wrap gap-1">
+      <div class="flex-1 flex flex-col bg-primary rounded-2xl p-2 justify-center items-center"
+           *ngFor="let person of getPeopleFromIds(task.taskPeopleId)">
+        <h1 class="text-secondary">{{ person.personName }}</h1>
+      </div>
+    </div>
+
+    <div *ngIf="getPeopleFromIds(task.taskPeopleId).length === 0">
+      <app-not-found [color]="'text-primary'" [tittle]="'No cuenta con personal asignado'"
+                     [description]="'¡Agregue mas personas!'"/>
+    </div>
+
+
+  </app-modal>
+
+</div>
+<app-not-found *ngIf="taskList.length === 0"/>

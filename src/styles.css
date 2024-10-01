@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html, body {
+  height: 100%;
+}
+
+
+::-webkit-scrollbar-track {
+
+  background-color: #003a61;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 17%);
+  background-color: #003a61;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #e65517;
+  border-radius: 15px;
+}

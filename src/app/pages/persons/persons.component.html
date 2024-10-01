@@ -1,0 +1,12 @@
+<app-header-pages [tittle]="'Gestión de'" [subtitle]="'personas'"
+                  [description]="'En esta sección puede eliminar, editar y crear nuevas personas.'"
+                  (inputValueEmitter)="getInputValue($event)">
+  <app-button [buttonText]="'Crear Persona'" (onClickEmitter)="setModalVisibility()"/>
+</app-header-pages>
+<app-person-list [personList]="filteredPersonList"/>
+
+
+<app-modal [modalTitle]="'Creación de personas'" [modalDescription]="'Ingrese los datos de la persona que desea crear.'"
+           [modalVisibility]="isModalVisible" (onClickCloseModalEmitter)="setModalVisibility()">
+  <app-person-create (onClickCloseModalEmitter)="setModalVisibility()" />
+</app-modal>
