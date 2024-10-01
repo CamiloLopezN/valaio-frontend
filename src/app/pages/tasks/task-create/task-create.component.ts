@@ -34,7 +34,6 @@ export class TaskCreateComponent implements OnInit {
   submitTask() {
     this._tasksService.addTask({
       ...this.taskForm.value,
-      taskId: this._tasksService.getTaskList().length + 1,
       taskIcon: 'task',
       taskStatus: 'PENDING'
     });

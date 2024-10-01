@@ -35,7 +35,6 @@ export class PersonCreateComponent implements OnInit {
   submitPerson() {
     this._peopleService.addPerson({
       ...this.personForm.value,
-      personId: this._peopleService.getPersonList().length + 1,
       personIcon: 'person',
     });
     this.onClickCloseModalEmitter.emit();

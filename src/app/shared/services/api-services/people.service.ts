@@ -39,6 +39,8 @@ export class PeopleService {
   }
 
   addPerson(person: IPersonType) {
+    const maxId = this.initPersonList.reduce((max, person) => person.personId > max ? person.personId : max, 0);
+    person.personId = maxId + 1;
     this.initPersonList.push(person);
     localStorage.setItem('people', JSON.stringify(this.initPersonList));
   }

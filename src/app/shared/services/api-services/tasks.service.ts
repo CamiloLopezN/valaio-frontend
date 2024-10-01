@@ -50,6 +50,8 @@ export class TasksService {
   }
 
   addTask(task: ITaskType) {
+    const maxId = this.initTaskList.reduce((max, task) => task.taskId > max ? task.taskId : max, 0);
+    task.taskId = maxId + 1;
     this.initTaskList.push(task);
     localStorage.setItem('tasks', JSON.stringify(this.initTaskList));
   }
